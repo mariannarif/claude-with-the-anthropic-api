@@ -1,0 +1,257 @@
+
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Prompt Evaluation Report</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    margin: 0;
+                    padding: 20px;
+                    color: #333;
+                }
+                .header {
+                    background-color: #f0f0f0;
+                    padding: 20px;
+                    border-radius: 5px;
+                    margin-bottom: 20px;
+                }
+                .summary-stats {
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                }
+                .stat-box {
+                    background-color: #fff;
+                    border-radius: 5px;
+                    padding: 15px;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                    flex-basis: 30%;
+                    min-width: 200px;
+                }
+                .stat-value {
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin-top: 5px;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 20px;
+                }
+                th {
+                    background-color: #4a4a4a;
+                    color: white;
+                    text-align: left;
+                    padding: 12px;
+                }
+                td {
+                    padding: 10px;
+                    border-bottom: 1px solid #ddd;
+                    vertical-align: top;
+                }
+                tr:nth-child(even) {
+                    background-color: #f9f9f9;
+                }
+                .output-cell {
+                    white-space: pre-wrap;
+                }
+                .score {
+                    font-weight: bold;
+                    padding: 5px 10px;
+                    border-radius: 3px;
+                    display: inline-block;
+                }
+                .score-high {
+                    background-color: #c8e6c9;
+                    color: #2e7d32;
+                }
+                .score-medium {
+                    background-color: #fff9c4;
+                    color: #f57f17;
+                }
+                .score-low {
+                    background-color: #ffcdd2;
+                    color: #c62828;
+                }
+                .output {
+                    overflow: auto;
+                    white-space: pre-wrap;
+                }
+
+                .output pre {
+                    background-color: #f5f5f5;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    padding: 10px;
+                    margin: 0;
+                    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+                    font-size: 14px;
+                    line-height: 1.4;
+                    color: #333;
+                    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+                    overflow-x: auto;
+                    white-space: pre-wrap; 
+                    word-wrap: break-word; 
+                }
+
+                td {
+                    width: 20%;
+                }
+                .score-col {
+                    width: 80px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>Prompt Evaluation Report</h1>
+                <div class="summary-stats">
+                    <div class="stat-box">
+                        <div>Total Test Cases</div>
+                        <div class="stat-value">5</div>
+                    </div>
+                    <div class="stat-box">
+                        <div>Average Score</div>
+                        <div class="stat-value">9.0 / 10</div>
+                    </div>
+                    <div class="stat-box">
+                        <div>Pass Rate (≥7)</div>
+                        <div class="stat-value">100.0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Prompt Inputs</th>
+                        <th>Solution Criteria</th>
+                        <th>Output</th>
+                        <th>Score</th>
+                        <th>Reasoning</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                <tr>
+                    <td>Environmental science climate change report with complex, interconnected research topics spanning multiple domains</td>
+                    <td class="prompt-inputs"><strong>content:</strong> Climate change research increasingly demonstrates complex interactions between atmospheric carbon dynamics, oceanic thermal absorption, and terrestrial ecosystem responses. Recent studies reveal that melting Arctic permafrost is releasing substantial methane reserves, creating a potential positive feedback loop that could accelerate global temperature increases. Interdisciplinary research suggests that these environmental transformations have profound implications for biodiversity, agricultural sustainability, and regional climate patterns across multiple geographic zones.</td>
+                    <td class="criteria">• Accurately identify all distinct research topics in the text<br>• Represent topics as a JSON array of unique, descriptive strings<br>• Capture both broad and specific domain-level topics</td>
+                    <td class="output"><pre>[
+    "Climate change research",
+    "Atmospheric carbon dynamics",
+    "Oceanic thermal absorption", 
+    "Terrestrial ecosystem responses",
+    "Arctic permafrost melting",
+    "Methane release",
+    "Global temperature increases",
+    "Biodiversity impacts",
+    "Agricultural sustainability",
+    "Regional climate patterns"
+]</pre></td>
+                    <td class="score-col"><span class="score score-high">9</span></td>
+                    <td class="reasoning">The solution successfully extracts topics from the scholarly text, meeting all mandatory requirements. The JSON array contains unique, descriptive strings representing both broad and specific research domains mentioned in the passage. Topics capture the key research areas around climate change, environmental dynamics, and ecological impacts.</td>
+                </tr>
+            
+                <tr>
+                    <td>Technical computer science research excerpt discussing machine learning methodologies with overlapping technical concepts</td>
+                    <td class="prompt-inputs"><strong>content:</strong> Recent advances in deep learning architectures have significantly transformed neural network performance in complex pattern recognition tasks. Convolutional neural networks (CNNs) and transformer models demonstrate remarkable capabilities in feature extraction, with attention mechanisms enabling more nuanced representation learning. Specifically, hybrid architectures combining residual connections with self-attention layers have shown promising results in reducing gradient propagation challenges while maintaining high representational capacity across diverse machine learning domains.</td>
+                    <td class="criteria">• Correctly identify core technical topics<br>• Generate topics as a JSON array of strings<br>• Capture both broad and specific technical concepts</td>
+                    <td class="output"><pre>[
+    "deep learning architectures",
+    "neural network performance",
+    "pattern recognition",
+    "convolutional neural networks",
+    "transformer models",
+    "feature extraction",
+    "attention mechanisms",
+    "representation learning",
+    "residual connections",
+    "self-attention layers",
+    "gradient propagation",
+    "machine learning domains"
+]</pre></td>
+                    <td class="score-col"><span class="score score-high">9</span></td>
+                    <td class="reasoning">The solution successfully extracts technical topics from the text, meeting all mandatory requirements. The topics capture both broad and specific technical concepts related to deep learning and neural networks. The JSON array is correctly formatted with string topics, and the extraction covers the key themes of the passage.</td>
+                </tr>
+            
+                <tr>
+                    <td>Humanities passage about Renaissance art with interdisciplinary themes requiring nuanced topic extraction</td>
+                    <td class="prompt-inputs"><strong>content:</strong> During the Renaissance, art became a profound interdisciplinary dialogue between visual representation, philosophical inquiry, and emerging scientific observation. Painters like Leonardo da Vinci epitomized this convergence, seamlessly blending anatomical precision with aesthetic expression through techniques such as sfumato and chiaroscuro. His works, particularly anatomical sketches and paintings like 'The Last Supper', demonstrated how artistic practice could simultaneously explore human physiology, spiritual symbolism, and mathematical perspective, challenging traditional boundaries between disciplines.</td>
+                    <td class="criteria">• Accurately capture broad interdisciplinary topics<br>• Identify specific conceptual themes present in the text<br>• Extract topics that reflect the scholarly nature of the passage</td>
+                    <td class="output"><pre>[
+    "Renaissance art",
+    "Interdisciplinary dialogue",
+    "Visual representation",
+    "Philosophical inquiry",
+    "Scientific observation", 
+    "Leonardo da Vinci",
+    "Anatomical precision",
+    "Aesthetic expression",
+    "Sfumato technique",
+    "Chiaroscuro technique",
+    "Anatomical sketches",
+    "Mathematical perspective",
+    "Spiritual symbolism"
+]</pre></td>
+                    <td class="score-col"><span class="score score-high">9</span></td>
+                    <td class="reasoning">The solution successfully extracts topics from the scholarly text, meeting all mandatory requirements. The topics cover art, science, philosophy, and specific techniques, demonstrating a nuanced understanding of the passage's interdisciplinary themes. The JSON array format is correct, and each topic is a clean string without additional commentary.</td>
+                </tr>
+            
+                <tr>
+                    <td>Interdisciplinary social science paper exploring technological impact on cultural anthropology requiring precise thematic parsing</td>
+                    <td class="prompt-inputs"><strong>content:</strong> Digital technologies are fundamentally reshaping anthropological research methodologies in the 21st century. Ethnographic fieldwork now increasingly incorporates digital ethnography, where researchers analyze online communities, social media interactions, and virtual cultural spaces. This technological integration allows anthropologists to explore transnational identities, digital subcultures, and emergent communication patterns that transcend traditional geographic boundaries. Machine learning and big data analytics are enabling more nuanced cross-cultural comparative studies, providing unprecedented insights into human social dynamics and cultural adaptation mechanisms.</td>
+                    <td class="criteria">• Correctly identify core thematic topics from the scholarly text<br>• Represent topics as a JSON array of distinct, precise strings<br>• Capture both broad and specific themes present in the passage</td>
+                    <td class="output"><pre>[
+    "Digital technologies in anthropological research",
+    "Digital ethnography",
+    "Online communities",
+    "Social media interactions",
+    "Virtual cultural spaces",
+    "Transnational identities",
+    "Digital subcultures",
+    "Communication patterns",
+    "Machine learning in anthropology",
+    "Big data analytics",
+    "Cross-cultural comparative studies",
+    "Human social dynamics",
+    "Cultural adaptation mechanisms"
+]</pre></td>
+                    <td class="score-col"><span class="score score-high">9</span></td>
+                    <td class="reasoning">The solution fully meets all mandatory and secondary criteria. It successfully extracts topics as a clean JSON array of strings, captures the key themes from the scholarly text, and provides a nuanced representation of the passage's content without extraneous information.</td>
+                </tr>
+            
+                <tr>
+                    <td>Philosophical text analyzing epistemological theories with abstract and conceptual topic identification challenges</td>
+                    <td class="prompt-inputs"><strong>content:</strong> Epistemological inquiry into the nature of knowledge reveals profound complexities in understanding human perception and rationality. Philosophers like Kant and Descartes have long grappled with the fundamental questions of how we acquire knowledge, challenging traditional empiricist and rationalist frameworks. The dialectic between subjective experience and objective reasoning creates intricate epistemological landscapes that challenge our understanding of truth, belief formation, and the fundamental limits of human cognitive processes.</td>
+                    <td class="criteria">• Identify core philosophical topics mentioned<br>• Capture key epistemological concepts<br>• Represent philosophical thinkers and theories</td>
+                    <td class="output"><pre>[
+    "Epistemology",
+    "Human Perception",
+    "Rationality",
+    "Philosophy of Knowledge",
+    "Kant",
+    "Descartes",
+    "Empiricism",
+    "Rationalism",
+    "Subjective Experience",
+    "Objective Reasoning",
+    "Cognitive Processes",
+    "Truth",
+    "Belief Formation"
+]</pre></td>
+                    <td class="score-col"><span class="score score-high">9</span></td>
+                    <td class="reasoning">The solution fully meets all mandatory requirements by providing a JSON array of string topics extracted from the text. It captures the core philosophical and epistemological concepts, represents key thinkers, and follows the specified extraction guidelines precisely. The topics comprehensively reflect the passage's content without additional commentary.</td>
+                </tr>
+            
+                </tbody>
+            </table>
+        </body>
+        </html>
+        

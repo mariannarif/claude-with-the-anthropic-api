@@ -1,0 +1,65 @@
+[
+  {
+    "output": "Athlete Meal Plan:\n\nCalorie Calculation:\n- Base Metabolic Rate (BMR): 1,938 calories\n- Activity Level (Training Season): 2,900 calories/day\n- Macronutrient Split: 35% protein, 30% carbs, 35% fat\n\nDaily Macronutrient Breakdown:\n- Protein: 254g (1,016 calories)\n- Carbs: 218g (870 calories)\n- Fat: 107g (963 calories)\n\nMeal Plan:\n\nBreakfast (7:00 AM) - 700 calories\n- 100g rolled oats\n- 2 whole eggs\n- 100g chicken breast\n- 50g banana\n- 30g almond butter\nMacros: Protein 55g, Carbs 65g, Fat 32g\n\nMid-Morning Snack (10:00 AM) - 350 calories\n- 150g canned tuna\n- 50g sweet potato\n- Mixed greens\nMacros: Protein 35g, Carbs 25g, Fat 10g\n\nLunch (1:00 PM) - 650 calories\n- 150g lean ground turkey\n- 100g brown rice\n- 100g mixed vegetables\n- Olive oil dressing\nMacros: Protein 60g, Carbs 55g, Fat 25g\n\nPost-Workout (4:00 PM) - 400 calories\n- Protein shake (30g plant-based protein)\n- 100g rice cakes\n- 1 apple\nMacros: Protein 40g, Carbs 45g, Fat 8g\n\nDinner (7:00 PM) - 600 calories\n- 200g salmon\n- 150g quinoa\n- Roasted vegetables\n- Coconut oil\nMacros: Protein 50g, Carbs 50g, Fat 30g\n\nEvening Snack (9:00 PM) - 200 calories\n- 100g egg whites\n- 30g almonds\nMacros: Protein 20g, Carbs 8g, Fat 15g\n\nBudget-Friendly Considerations:\n- Canned tuna\n- Eggs\n- Ground turkey\n- Bulk grains\n- Frozen vegetables\n\nNotes:\n- Lactose-free options used\n- No dairy products\n- Balanced macronutrients\n- Consistent protein intake\n- Whole food sources\n\nHydration: 3-4 liters of water daily",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "180",
+        "weight": "85",
+        "goal": "muscle maintenance and performance optimization during training season",
+        "restrictions": "lactose intolerant, limited budget for groceries"
+      },
+      "solution_criteria": [
+        "Provide daily caloric intake meeting athlete's energy requirements",
+        "Include protein sources supporting muscle recovery",
+        "Ensure meal plan is cost-effective for collegiate budget",
+        "Accommodate lactose intolerance dietary restriction"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Budget-conscious collegiate athlete seeking affordable, performance-optimized meal planning"
+    },
+    "score": 9,
+    "reasoning": "The solution comprehensively addresses the mandatory requirements by providing a detailed daily meal plan with exact caloric intake (2,900 calories), precise macronutrient breakdown, and meals with specific foods, portions, and timing. The plan successfully accommodates lactose intolerance and provides consistent protein intake for muscle recovery. While meeting all core criteria, there are minor areas for potential optimization around budget and variety."
+  },
+  {
+    "output": "Athlete Meal Plan: Vegan, Gluten-Free Endurance Cyclist\n\nDaily Calorie Calculation:\n- Base Metabolic Rate (BMR): ~1,750 calories\n- Activity Level Multiplier (High Intensity Cycling): 1.8\n- Total Daily Calories: 3,150 calories\n\nMacronutrient Breakdown:\n- Protein: 25% (197g)\n- Carbohydrates: 50% (394g)\n- Fats: 25% (88g)\n\nMeal Plan:\n\n\ud83c\udf05 Pre-Ride Breakfast (6:30 AM) - 600 calories\n- Quinoa porridge (150g)\n- Chia seeds (30g)\n- Almond milk (200ml)\n- Mixed berries (100g)\n- Hemp protein powder (30g)\nMacros: 45g protein, 70g carbs, 20g fat\n\n\ud83d\udeb2 Mid-Ride Nutrition (10:00 AM) - 400 calories\n- Homemade energy balls:\n  - Dates (50g)\n  - Almonds (30g)\n  - Coconut flakes (20g)\n- Electrolyte drink (vegan, sugar-free)\nMacros: 15g protein, 50g carbs, 25g fat\n\n\ud83e\udd57 Post-Ride Lunch (12:30 PM) - 750 calories\n- Lentil and sweet potato bowl:\n  - Green lentils (150g)\n  - Roasted sweet potato (200g)\n  - Kale (100g)\n  - Avocado (80g)\n  - Pumpkin seeds (30g)\nMacros: 50g protein, 90g carbs, 35g fat\n\n\ud83c\udf4e Afternoon Snack (3:30 PM) - 400 calories\n- Smoothie:\n  - Spinach (50g)\n  - Banana (100g)\n  - Pea protein powder (30g)\n  - Almond butter (20g)\n  - Coconut water (200ml)\nMacros: 35g protein, 50g carbs, 15g fat\n\n\ud83c\udf7d\ufe0f Dinner (7:00 PM) - 700 calories\n- Tofu and vegetable stir-fry:\n  - Firm tofu (200g)\n  - Mixed vegetables (250g)\n  - Quinoa (100g)\n  - Tahini sauce (30g)\nMacros: 50g protein, 80g carbs, 25g fat\n\nEvening Recovery Drink (9:00 PM) - 300 calories\n- Vegan protein shake:\n  - Brown rice protein (40g)\n  - Almond milk (250ml)\n  - Turmeric\n  - Cinnamon\nMacros: 35g protein, 30g carbs, 10g fat\n\nTotal Daily Intake:\n- Calories: 3,150\n- Protein: 230g\n- Carbohydrates: 370g\n- Fats: 130g\n\nBudget-Friendly Tips:\n- Buy in bulk (quinoa, lentils, nuts)\n- Use frozen vegetables\n- Purchase protein powders in larger quantities\n- Shop seasonal produce\n\nHydration:\n- Water intake: 4-5 liters per day\n- Electrolyte supplementation recommended\n\nNotes:\n- Meals are gluten-free\n- No processed sugars\n- 100% plant-based\n- Optimized for endurance cycling recovery\n\nRecommended Supplements:\n- Vitamin B12\n- Omega-3 (algae-based)\n- Vitamin D\n- Iron",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "175",
+        "weight": "72",
+        "goal": "Muscle recovery and performance optimization for endurance cycling",
+        "restrictions": "Vegan diet, no processed sugars, gluten-free"
+      },
+      "solution_criteria": [
+        "Provide at least 80g of plant-based protein across daily meals",
+        "Include balanced macronutrient distribution for athletic recovery",
+        "Ensure meals are 100% vegan-compliant",
+        "Design meal plan under 2500 calories"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Vegan athlete with specific protein and recovery nutritional constraints"
+    },
+    "score": 7,
+    "reasoning": "The solution provides a meticulously structured meal plan that meets most criteria. It successfully delivers plant-based protein, follows vegan guidelines, and offers balanced nutrition. However, the calorie total exceeds the specified limit, which prevents a perfect score."
+  },
+  {
+    "output": "Athlete Nutrition Profile:\n- Height: 182 cm\n- Weight: 78 kg\n- Activity Level: Ultra-endurance mountain runner\n\nDaily Calorie Calculation:\n- Base Metabolic Rate: 1,850 calories\n- Training Expenditure: +1,200 calories\n- Total Daily Calories: 3,050 calories\n\nMacronutrient Breakdown:\n- Protein: 25% (191g)\n- Carbohydrates: 55% (420g)\n- Fat: 20% (68g)\n\nMeal Plan:\n\nPre-Dawn Meal (5:30 AM) - 500 calories\n- Quinoa porridge (150g)\n- Almond milk (200ml)\n- Chia seeds (30g)\n- Banana (100g)\n- Almond butter (25g)\nMacros: 20g protein, 65g carbs, 15g fat\n\nMid-Morning Pre-Training (8:00 AM) - 400 calories\n- Sweet potato (200g)\n- Grilled chicken breast (150g)\n- Coconut oil (15g)\nMacros: 35g protein, 45g carbs, 12g fat\n\nDuring Training Nutrition (Continuous intake)\n- Gluten-free energy bars (2x50g)\n- Electrolyte drink mix\n- Dried fruit mix (50g)\nMacros: 10g protein, 80g carbs, 5g fat\n\nPost-Training Recovery (12:30 PM) - 650 calories\n- Salmon fillet (200g)\n- Quinoa (150g)\n- Roasted vegetables (mixed, 250g)\n- Olive oil (20g)\nMacros: 50g protein, 70g carbs, 25g fat\n\nAfternoon Snack (3:30 PM) - 350 calories\n- Rice cakes (100g)\n- Smoked turkey slices (100g)\n- Avocado (100g)\nMacros: 30g protein, 40g carbs, 15g fat\n\nDinner (7:00 PM) - 600 calories\n- Grass-fed beef (180g)\n- Sweet potato mash (200g)\n- Steamed broccoli (200g)\n- Coconut oil (15g)\nMacros: 45g protein, 70g carbs, 20g fat\n\nEvening Recovery Shake (9:00 PM) - 250 calories\n- Pea protein isolate (40g)\n- Almond milk (250ml)\n- Mixed berries (100g)\nMacros: 30g protein, 20g carbs, 5g fat\n\nDaily Total:\n- Calories: 3,050\n- Protein: 220g\n- Carbohydrates: 420g\n- Fat: 97g\n\nKey Nutritional Strategies:\n- Gluten-free grains: Quinoa, rice\n- Dairy alternatives: Almond milk\n- High-quality proteins: Chicken, salmon, beef\n- Complex carbohydrates for sustained energy\n- Healthy fats for hormone balance\n\nHydration:\n- 4-5 liters of water\n- Electrolyte supplementation\n\nBudget Considerations:\n- Buy proteins in bulk\n- Choose seasonal vegetables\n- Use frozen berries\n- Purchase from wholesale markets\n\nSupplement Recommendations:\n- Omega-3 fish oil\n- Vitamin D\n- Electrolyte powder\n- Magnesium\n\nNotes:\n- Adjust portions based on daily training intensity\n- Monitor body weight and performance\n- Consult sports nutritionist for personalized plan",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "182",
+        "weight": "78",
+        "goal": "Maintain extreme endurance performance for ultra-marathon mountain running",
+        "restrictions": "Gluten-free, no dairy"
+      },
+      "solution_criteria": [
+        "Provides minimum 4000 calories per day",
+        "Includes balanced macronutrient distribution for endurance athletes",
+        "Meets gluten-free and dairy-free dietary restrictions",
+        "Offers meal variety within nutritional constraints"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Extreme sports athlete with high-calorie, nutrient-dense requirements (e.g., mountain climber or ultra-marathon runner)"
+    },
+    "score": 3,
+    "reasoning": "While the solution provides a meticulously structured meal plan with precise nutritional tracking, it critically fails to meet the 4,000 calorie requirement for an ultra-marathon mountain runner. The calorie deficit could significantly impair performance and recovery. The plan demonstrates strong attention to dietary restrictions and meal timing, but does not provide sufficient energy for the athlete's extreme endurance needs."
+  }
+]

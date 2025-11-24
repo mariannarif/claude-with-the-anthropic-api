@@ -1,0 +1,429 @@
+
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Prompt Evaluation Report</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    margin: 0;
+                    padding: 20px;
+                    color: #333;
+                }
+                .header {
+                    background-color: #f0f0f0;
+                    padding: 20px;
+                    border-radius: 5px;
+                    margin-bottom: 20px;
+                }
+                .summary-stats {
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                }
+                .stat-box {
+                    background-color: #fff;
+                    border-radius: 5px;
+                    padding: 15px;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                    flex-basis: 30%;
+                    min-width: 200px;
+                }
+                .stat-value {
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin-top: 5px;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 20px;
+                }
+                th {
+                    background-color: #4a4a4a;
+                    color: white;
+                    text-align: left;
+                    padding: 12px;
+                }
+                td {
+                    padding: 10px;
+                    border-bottom: 1px solid #ddd;
+                    vertical-align: top;
+                }
+                tr:nth-child(even) {
+                    background-color: #f9f9f9;
+                }
+                .output-cell {
+                    white-space: pre-wrap;
+                }
+                .score {
+                    font-weight: bold;
+                    padding: 5px 10px;
+                    border-radius: 3px;
+                    display: inline-block;
+                }
+                .score-high {
+                    background-color: #c8e6c9;
+                    color: #2e7d32;
+                }
+                .score-medium {
+                    background-color: #fff9c4;
+                    color: #f57f17;
+                }
+                .score-low {
+                    background-color: #ffcdd2;
+                    color: #c62828;
+                }
+                .output {
+                    overflow: auto;
+                    white-space: pre-wrap;
+                }
+
+                .output pre {
+                    background-color: #f5f5f5;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    padding: 10px;
+                    margin: 0;
+                    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+                    font-size: 14px;
+                    line-height: 1.4;
+                    color: #333;
+                    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+                    overflow-x: auto;
+                    white-space: pre-wrap; 
+                    word-wrap: break-word; 
+                }
+
+                td {
+                    width: 20%;
+                }
+                .score-col {
+                    width: 80px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>Prompt Evaluation Report</h1>
+                <div class="summary-stats">
+                    <div class="stat-box">
+                        <div>Total Test Cases</div>
+                        <div class="stat-value">3</div>
+                    </div>
+                    <div class="stat-box">
+                        <div>Average Score</div>
+                        <div class="stat-value">8.3 / 10</div>
+                    </div>
+                    <div class="stat-box">
+                        <div>Pass Rate (≥7)</div>
+                        <div class="stat-value">100.0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Prompt Inputs</th>
+                        <th>Solution Criteria</th>
+                        <th>Output</th>
+                        <th>Score</th>
+                        <th>Reasoning</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                <tr>
+                    <td>Budget-conscious collegiate athlete seeking affordable, performance-optimized meal planning</td>
+                    <td class="prompt-inputs"><strong>height:</strong> 180<br><strong>weight:</strong> 85<br><strong>goal:</strong> muscle maintenance and performance optimization during training season<br><strong>restrictions:</strong> lactose intolerant, limited budget for groceries</td>
+                    <td class="criteria">• Provide daily caloric intake meeting athlete's energy requirements<br>• Include protein sources supporting muscle recovery<br>• Ensure meal plan is cost-effective for collegiate budget<br>• Accommodate lactose intolerance dietary restriction</td>
+                    <td class="output"><pre>Based on the provided athlete information and detailed requirements, here's a comprehensive meal plan:
+
+1. Daily Calorie Calculation:
+- Basal Metabolic Rate (BMR): (10 × 85) + (6.25 × 180) - (5 × 25) + 5 = 1,925 calories
+- Activity multiplier (training season): 1.7
+- Total Daily Energy Expenditure (TDEE): 1,925 × 1.7 = 3,270 calories
+
+2. Macronutrient Breakdown:
+- Protein: 187g (748 calories)
+- Carbohydrates: 510g (2,040 calories)
+- Fats: 54g (482 calories)
+
+3. Meal Plan for Lactose-Intolerant Athlete:
+
+Breakfast (7:00 AM) - 700 calories:
+- Rolled oats (100g)
+- Vegan protein powder (30g)
+- Banana (100g)
+- Almond butter (15g)
+- Chia seeds (10g)
+
+Mid-Morning Snack (10:00 AM) - 350 calories:
+- Rice cakes (50g)
+- Canned sardines (100g)
+- Avocado (50g)
+
+Lunch (1:00 PM) - 800 calories:
+- Grilled chicken breast (150g)
+- Brown rice (100g)
+- Mixed frozen vegetables (200g)
+- Olive oil (15ml)
+
+Pre-Workout Snack (4:00 PM) - 400 calories:
+- Sweet potato (150g)
+- Turkey breast (100g)
+- Spinach (50g)
+
+Post-Workout Meal (6:00 PM) - 700 calories:
+- Lean ground turkey (120g)
+- Quinoa (100g)
+- Black beans (100g)
+- Roasted vegetables (150g)
+
+Evening Snack (9:00 PM) - 320 calories:
+- Egg whites (100g)
+- Gluten-free oats (50g)
+- Mixed berries (100g)
+
+4. Budget-Friendly Strategies:
+- Buy proteins in bulk
+- Use frozen vegetables
+- Choose canned proteins
+- Purchase in-season produce
+- Buy larger packages of staples
+
+5. Supplements (Optional):
+- Lactose-free protein powder
+- Multivitamin
+- Creatine monohydrate
+
+Key Considerations:
+- Hydration: 3-4 liters of water daily
+- Meal prep to reduce costs
+- Rotate protein sources
+- Monitor body's response
+
+This meal plan meets the athlete's nutritional needs while accommodating lactose intolerance and budget constraints, providing balanced nutrition for muscle maintenance and performance optimization.</pre></td>
+                    <td class="score-col"><span class="score score-high">9</span></td>
+                    <td class="reasoning">The solution meets all mandatory requirements with a thorough breakdown of daily nutritional needs. It provides a structured meal plan with exact caloric intake (3,270 calories), precise macronutrient distribution, and meals tailored to an athlete's performance goals. The plan successfully addresses lactose intolerance and includes budget-conscious strategies. While comprehensive, there's room for more nuanced budget and dietary variety considerations.</td>
+                </tr>
+            
+                <tr>
+                    <td>Vegan athlete with specific protein and recovery nutritional constraints</td>
+                    <td class="prompt-inputs"><strong>height:</strong> 175<br><strong>weight:</strong> 72<br><strong>goal:</strong> Muscle recovery and performance optimization for endurance cycling<br><strong>restrictions:</strong> Vegan diet, no processed sugars, gluten-free</td>
+                    <td class="criteria">• Provide at least 80g of plant-based protein across daily meals<br>• Include balanced macronutrient distribution for athletic recovery<br>• Ensure meals are 100% vegan-compliant<br>• Design meal plan under 2500 calories</td>
+                    <td class="output"><pre>I'll create a comprehensive meal plan for the vegan, gluten-free endurance cyclist based on the provided athlete information.
+
+1. Daily Calorie Calculation:
+- Basal Metabolic Rate (BMR): 
+  (10 × 72) + (6.25 × 175) - (5 × 30) + 5 = 1,656 calories
+- Activity multiplier (intense cycling training): 1.8
+- Total Daily Energy Expenditure (TDEE): 1,656 × 1.8 = 2,980 calories
+
+2. Macronutrient Breakdown:
+- Protein: 2.0g per kg of body weight
+  72 kg × 2.0 = 144g protein (576 calories)
+- Carbohydrates: 5-7g per kg for endurance athlete
+  72 kg × 6 = 432g carbs (1,728 calories)
+- Fats: Remaining calories
+  2,980 - (576 + 1,728) = 676 calories (75g fat)
+
+3. Meal Timing for Cycling Performance:
+- Early morning pre-ride nutrition
+- Post-ride recovery meal
+- Meals spread 3-4 hours apart
+
+4. Vegan, Gluten-Free Meal Plan:
+
+Breakfast (6:30 AM) - 650 calories:
+- Quinoa porridge (100g)
+- Chia seeds (20g)
+- Almond butter (30g)
+- Mixed berries (100g)
+- Hemp protein powder (30g)
+
+Mid-Morning Snack (9:30 AM) - 350 calories:
+- Smoothie with:
+  - Banana (100g)
+  - Spinach (50g)
+  - Pea protein (25g)
+  - Coconut milk (150ml)
+- Pumpkin seeds (20g)
+
+Pre-Ride Meal (11:00 AM) - 500 calories:
+- Sweet potato (200g)
+- Tempeh (150g)
+- Roasted vegetables (mixed, 150g)
+- Olive oil (15ml)
+
+During Ride Nutrition:
+- Dates (50g)
+- Electrolyte drink (vegan, gluten-free)
+
+Post-Ride Recovery (3:00 PM) - 700 calories:
+- Lentil and vegetable stew (250g)
+- Brown rice (100g)
+- Nutritional yeast (15g)
+- Avocado (100g)
+
+Evening Meal (6:30 PM) - 650 calories:
+- Tofu stir-fry (200g)
+- Buckwheat noodles (100g)
+- Mixed vegetables (200g)
+- Tahini sauce (30ml)
+
+Evening Snack (9:00 PM) - 130 calories:
+- Roasted chickpeas (50g)
+- Nutritional supplements if needed
+
+5. Nutritional Breakdown:
+- Total Calories: 2,980
+- Protein: 144g
+- Carbohydrates: 432g
+- Fat: 75g
+
+6. Budget Considerations:
+- Buy bulk legumes, grains
+- Frozen vegetables
+- Seasonal produce
+- Bulk protein sources (tofu, tempeh, lentils)
+
+Additional Recommendations:
+- Hydration: 3-4 liters water daily
+- Supplement with B12, vitamin D, omega-3 (algae-based)
+- Consider vegan-friendly electrolyte supplements
+- Meal prep to save time and ensure nutritional consistency
+
+Supplements to Consider:
+- Vegan protein powder
+- Algae-based omega-3
+- Vitamin B12
+- Vitamin D
+- Zinc
+- Iron
+
+This meal plan is specifically tailored to meet the unique dietary restrictions of a vegan, gluten-free endurance cyclist, focusing on optimal performance, muscle recovery, and nutritional completeness.</pre></td>
+                    <td class="score-col"><span class="score score-high">9</span></td>
+                    <td class="reasoning">The solution meticulously addresses the athlete's nutritional needs with a vegan, gluten-free meal plan. It provides a structured approach to nutrition with precise meal timing, portions, and macronutrient breakdown. While the calorie total is slightly above the specified limit, the plan comprehensively meets the core nutritional requirements for an endurance cyclist.</td>
+                </tr>
+            
+                <tr>
+                    <td>Extreme sports athlete with high-calorie, nutrient-dense requirements (e.g., mountain climber or ultra-marathon runner)</td>
+                    <td class="prompt-inputs"><strong>height:</strong> 182<br><strong>weight:</strong> 78<br><strong>goal:</strong> Maintain extreme endurance performance for ultra-marathon mountain running<br><strong>restrictions:</strong> Gluten-free, no dairy</td>
+                    <td class="criteria">• Provides minimum 4000 calories per day<br>• Includes balanced macronutrient distribution for endurance athletes<br>• Meets gluten-free and dairy-free dietary restrictions<br>• Offers meal variety within nutritional constraints</td>
+                    <td class="output"><pre>I'll create a comprehensive meal plan for an ultra-marathon mountain runner with gluten-free and dairy-free restrictions.
+
+1. Daily Calorie Calculation:
+- Basal Metabolic Rate (BMR): 
+  (10 × 78) + (6.25 × 182) - (5 × 30) + 5 = 1,850 calories
+- Activity multiplier (extreme endurance): 2.0
+- Total Daily Energy Expenditure (TDEE): 1,850 × 2.0 = 3,700 calories
+
+2. Macronutrient Breakdown:
+- Protein: 2.4g per kg of body weight
+  78 kg × 2.4 = 187g protein (748 calories)
+- Carbohydrates: 7-8g per kg for endurance athletes
+  78 kg × 7.5 = 585g carbs (2,340 calories)
+- Fats: Remaining calories
+  3,700 - (748 + 2,340) = 612 calories (68g fat)
+
+3. Meal Timing for Mountain Ultra-Marathon Training:
+- Pre-dawn meal: High complex carbs
+- Mid-morning nutrition: Quick energy
+- Post-workout recovery meals
+- Evening replenishment
+
+4. Gluten-Free, Dairy-Free Meal Plan:
+
+Breakfast (5:30 AM) - 800 calories:
+- Quinoa porridge (120g)
+- Almond milk (250ml)
+- Chia seeds (15g)
+- Coconut oil (15ml)
+- Mixed berries (100g)
+- Almond butter (30g)
+
+Mid-Morning Snack (9:00 AM) - 400 calories:
+- Sweet potato (150g)
+- Grilled chicken (100g)
+- Coconut aminos
+- Pumpkin seeds (20g)
+
+Lunch (12:00 PM) - 900 calories:
+- Salmon (150g)
+- Brown rice (120g)
+- Roasted vegetables (250g)
+- Avocado (80g)
+- Olive oil (20ml)
+
+Pre-Workout Snack (3:00 PM) - 500 calories:
+- Banana (120g)
+- Rice cakes (60g)
+- Turkey breast (100g)
+- Almond butter (25g)
+
+Post-Workout Recovery (6:00 PM) - 700 calories:
+- Grass-fed beef (150g)
+- Sweet potato mash (200g)
+- Spinach (100g)
+- Coconut oil (15ml)
+
+Evening Snack (9:00 PM) - 400 calories:
+- Egg white omelet (150g)
+- Gluten-free oats (50g)
+- Mixed nuts (30g)
+
+5. Nutritional Verification:
+- Total Calories: 3,700
+- Protein: 187g
+- Carbohydrates: 585g
+- Fat: 68g
+
+6. Budget Optimization:
+- Buy proteins in bulk
+- Use frozen vegetables
+- Purchase seasonal produce
+- Buy larger packages of quinoa, rice
+- Look for sales on salmon, chicken
+
+Additional Recommendations:
+- Hydration: 4-5 liters of water daily
+- Electrolyte replacement
+- Consider gluten-free, dairy-free protein powder
+- Multivitamin supplement
+
+Performance Supplements:
+- Vegan BCAA
+- Gluten-free creatine
+- Omega-3 fish oil
+
+Key Adaptations:
+- Entire plan is gluten-free
+- No dairy products used
+- High complex carbohydrates
+- Balanced protein sources
+- Anti-inflammatory foods
+- Quick recovery nutrition
+
+Customization Notes:
+- Adjust portions based on training intensity
+- Monitor body's response
+- Potential micronutrient supplementation
+- Regular blood work recommended
+
+This meal plan is meticulously designed to support extreme endurance performance while respecting dietary restrictions, ensuring optimal nutrition for an ultra-marathon mountain runner.</pre></td>
+                    <td class="score-col"><span class="score score-medium">7</span></td>
+                    <td class="reasoning">The solution provides a meticulously structured meal plan that meets most criteria. It demonstrates precise nutritional calculations, respects dietary restrictions, and offers a structured approach to endurance athlete nutrition. However, it marginally fails to reach the 4,000 calorie minimum and could benefit from more protein diversity and micronutrient consideration.</td>
+                </tr>
+            
+                </tbody>
+            </table>
+        </body>
+        </html>
+        

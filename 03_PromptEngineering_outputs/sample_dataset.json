@@ -1,0 +1,50 @@
+[
+  {
+    "prompt_inputs": {
+      "height": "182",
+      "weight": "78",
+      "goal": "Maintain extreme endurance performance for ultra-marathon mountain running",
+      "restrictions": "Gluten-free, no dairy"
+    },
+    "solution_criteria": [
+      "Provides minimum 4000 calories per day",
+      "Includes balanced macronutrient distribution for endurance athletes",
+      "Meets gluten-free and dairy-free dietary restrictions",
+      "Offers meal variety within nutritional constraints"
+    ],
+    "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+    "scenario": "Extreme sports athlete with high-calorie, nutrient-dense requirements (e.g., mountain climber or ultra-marathon runner)"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "72",
+      "goal": "Muscle recovery and performance optimization for endurance cycling",
+      "restrictions": "Vegan diet, no processed sugars, gluten-free"
+    },
+    "solution_criteria": [
+      "Provide at least 80g of plant-based protein across daily meals",
+      "Include balanced macronutrient distribution for athletic recovery",
+      "Ensure meals are 100% vegan-compliant",
+      "Design meal plan under 2500 calories"
+    ],
+    "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+    "scenario": "Vegan athlete with specific protein and recovery nutritional constraints"
+  },
+  {
+    "prompt_inputs": {
+      "height": "180",
+      "weight": "85",
+      "goal": "muscle maintenance and performance optimization during training season",
+      "restrictions": "lactose intolerant, limited budget for groceries"
+    },
+    "solution_criteria": [
+      "Provide daily caloric intake meeting athlete's energy requirements",
+      "Include protein sources supporting muscle recovery",
+      "Ensure meal plan is cost-effective for collegiate budget",
+      "Accommodate lactose intolerance dietary restriction"
+    ],
+    "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+    "scenario": "Budget-conscious collegiate athlete seeking affordable, performance-optimized meal planning"
+  }
+]

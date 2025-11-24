@@ -1,0 +1,65 @@
+[
+  {
+    "output": "For an ultra-marathon mountain runner with these specifications, here's a recommended nutrition plan:\n\nMacronutrient Balance:\n- Carbohydrates: 55-65% of daily calories (crucial for endurance)\n- Protein: 15-20% of daily calories\n- Healthy Fats: 20-25% of daily calories\n\nDaily Calorie Intake:\n- Estimated 3,000-3,500 calories (depending on training intensity)\n\nKey Food Recommendations:\n1. Gluten-free grains:\n- Quinoa\n- Rice\n- Amaranth\n- Buckwheat\n- Gluten-free oats\n\n2. Protein sources:\n- Lean meats\n- Fish\n- Eggs\n- Plant proteins (legumes, tofu)\n- Nuts and seeds\n\n3. Performance-enhancing foods:\n- Sweet potatoes\n- Chia seeds\n- Berries\n- Beets\n- Salmon\n- Avocados\n\n4. Dairy alternatives:\n- Almond milk\n- Coconut yogurt\n- Nutritional yeast for B-vitamins\n\nHydration:\n- 3-4 liters of water daily\n- Electrolyte supplements\n\nSupplements to consider:\n- Magnesium\n- Omega-3\n- Vitamin D\n- Protein powder (plant-based)",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "182",
+        "weight": "78",
+        "goal": "Maintain extreme endurance performance for ultra-marathon mountain running",
+        "restrictions": "Gluten-free, no dairy"
+      },
+      "solution_criteria": [
+        "Provides minimum 4000 calories per day",
+        "Includes balanced macronutrient distribution for endurance athletes",
+        "Meets gluten-free and dairy-free dietary restrictions",
+        "Offers meal variety within nutritional constraints"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Extreme sports athlete with high-calorie, nutrient-dense requirements (e.g., mountain climber or ultra-marathon runner)"
+    },
+    "score": 3,
+    "reasoning": "While the solution provides excellent nutritional guidance and food recommendations, it critically fails to meet the mandatory requirements of specifying exact meals, portions, and timing. The calorie range is also below the specified 4,000 calorie minimum for an ultra-marathon athlete. These omissions prevent the solution from meeting the core task requirements."
+  },
+  {
+    "output": "Based on the provided information, here's a nutritional recommendation:\n\nDietary Macronutrient Profile:\n- Protein: 2.0-2.2g per kg of body weight (170-187g daily)\n- Carbohydrates: 5-7g per kg of body weight (425-595g daily)\n- Healthy fats: 0.5-1g per kg of body weight (42-85g daily)\n\nBudget-Friendly, Lactose-Free Food Recommendations:\n\nProtein Sources:\n- Eggs\n- Chicken\n- Canned tuna\n- Beans and lentils\n- Tofu\n- Frozen chicken/turkey\n- Whey protein isolate (lactose-free)\n\nCarbohydrate Sources:\n- Rice\n- Oats\n- Potatoes\n- Whole wheat bread\n- Frozen vegetables\n- Bananas\n- Pasta\n\nHealthy Fat Sources:\n- Olive oil\n- Nuts (peanuts, almonds)\n- Avocado\n- Chia seeds\n- Peanut butter\n\nMeal Timing Tips:\n- Eat 4-5 balanced meals daily\n- Consume protein within 30 minutes post-workout\n- Stay hydrated\n- Consider meal prepping to control costs\n\nRecommended daily caloric intake: ~3,000-3,500 calories",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "180",
+        "weight": "85",
+        "goal": "muscle maintenance and performance optimization during training season",
+        "restrictions": "lactose intolerant, limited budget for groceries"
+      },
+      "solution_criteria": [
+        "Provide daily caloric intake meeting athlete's energy requirements",
+        "Include protein sources supporting muscle recovery",
+        "Ensure meal plan is cost-effective for collegiate budget",
+        "Accommodate lactose intolerance dietary restriction"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Budget-conscious collegiate athlete seeking affordable, performance-optimized meal planning"
+    },
+    "score": 3,
+    "reasoning": "While the solution provides solid nutritional guidelines and food recommendations, it fails to meet the mandatory requirements of specifying exact meals, portions, and timing. The output is more of a nutritional framework than a concrete 1-day meal plan. The caloric range is appropriate, and dietary restrictions are considered, but the lack of specific meal details prevents full compliance with the task description."
+  },
+  {
+    "output": "Based on the provided information, here's a recommended nutritional approach for this vegan endurance cyclist:\n\nMacronutrient Breakdown:\n- Protein: 1.6-2.0g per kg of body weight (115-145g daily)\n- Carbohydrates: 5-7g per kg of body weight (360-500g daily)\n- Healthy fats: 0.5-1g per kg of body weight (36-72g daily)\n\nRecommended Foods:\nProtein Sources:\n- Tofu\n- Tempeh\n- Seitan\n- Legumes (lentils, beans)\n- Quinoa\n- Plant-based protein powders (pea, hemp, rice protein)\n\nCarbohydrate Sources:\n- Sweet potatoes\n- Quinoa\n- Brown rice\n- Oats\n- Fruits (bananas, berries)\n- Gluten-free grains\n\nHealthy Fats:\n- Avocados\n- Nuts (almonds, walnuts)\n- Seeds (chia, flax, hemp)\n- Coconut\n- Olive oil\n\nRecovery & Performance Boosters:\n- Beetroot juice\n- Tart cherry juice\n- Turmeric\n- Spirulina\n- Nutritional yeast\n\nHydration:\n- Electrolyte-rich plant-based drinks\n- Water with added minerals\n\nMeal Timing:\n- Pre-ride: Complex carbs, moderate protein\n- During ride: Easy-to-digest carbs\n- Post-ride: Protein and carb combination\n\nSupplement Considerations:\n- Vitamin B12\n- Omega-3 (algae-based)\n- Iron\n- Zinc\n- Vitamin D\n\nConsultation with a sports nutritionist is recommended for personalized guidance.",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "175",
+        "weight": "72",
+        "goal": "Muscle recovery and performance optimization for endurance cycling",
+        "restrictions": "Vegan diet, no processed sugars, gluten-free"
+      },
+      "solution_criteria": [
+        "Provide at least 80g of plant-based protein across daily meals",
+        "Include balanced macronutrient distribution for athletic recovery",
+        "Ensure meals are 100% vegan-compliant",
+        "Design meal plan under 2500 calories"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Vegan athlete with specific protein and recovery nutritional constraints"
+    },
+    "score": 3,
+    "reasoning": "While the solution provides excellent nutritional guidance, it fails to meet the mandatory requirements of specifying daily caloric total, precise meal composition, and exact food portions. The output reads more like a nutritional strategy guide than a concrete 1-day meal plan. The lack of specific meal details and calorie count means this solution cannot be considered a complete meal plan."
+  }
+]

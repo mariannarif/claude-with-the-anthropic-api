@@ -1,0 +1,17 @@
+[
+  {
+    "task": "Write a Python function to list all the S3 buckets in an AWS account.",
+    "format": "python",
+    "solution_criteria": "The function should use the boto3 library to interact with the AWS API and return a list of all the S3 buckets in the account."
+  },
+  {
+    "task": "Create a JSON object that represents an AWS Lambda function configuration, including the function name, runtime, handler, and memory size.",
+    "format": "json",
+    "solution_criteria": "The JSON object should have the following keys: 'FunctionName', 'Runtime', 'Handler', and 'MemorySize', with appropriate values for each."
+  },
+  {
+    "task": "Write a regular expression to validate an AWS access key ID.",
+    "format": "regex",
+    "solution_criteria": "The regular expression should match a valid AWS access key ID, which is a 20-character string consisting of uppercase letters and numbers."
+  }
+]

@@ -1,0 +1,87 @@
+[
+  {
+    "output": "[\n    \"Climate change research\",\n    \"Atmospheric carbon dynamics\",\n    \"Oceanic thermal absorption\", \n    \"Terrestrial ecosystem responses\",\n    \"Arctic permafrost melting\",\n    \"Methane release\",\n    \"Global temperature increases\",\n    \"Biodiversity impacts\",\n    \"Agricultural sustainability\",\n    \"Regional climate patterns\"\n]",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "Climate change research increasingly demonstrates complex interactions between atmospheric carbon dynamics, oceanic thermal absorption, and terrestrial ecosystem responses. Recent studies reveal that melting Arctic permafrost is releasing substantial methane reserves, creating a potential positive feedback loop that could accelerate global temperature increases. Interdisciplinary research suggests that these environmental transformations have profound implications for biodiversity, agricultural sustainability, and regional climate patterns across multiple geographic zones."
+      },
+      "solution_criteria": [
+        "Accurately identify all distinct research topics in the text",
+        "Represent topics as a JSON array of unique, descriptive strings",
+        "Capture both broad and specific domain-level topics"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+      "scenario": "Environmental science climate change report with complex, interconnected research topics spanning multiple domains"
+    },
+    "score": 9,
+    "reasoning": "The solution successfully extracts topics from the scholarly text, meeting all mandatory requirements. The JSON array contains unique, descriptive strings representing both broad and specific research domains mentioned in the passage. Topics capture the key research areas around climate change, environmental dynamics, and ecological impacts."
+  },
+  {
+    "output": "[\n    \"deep learning architectures\",\n    \"neural network performance\",\n    \"pattern recognition\",\n    \"convolutional neural networks\",\n    \"transformer models\",\n    \"feature extraction\",\n    \"attention mechanisms\",\n    \"representation learning\",\n    \"residual connections\",\n    \"self-attention layers\",\n    \"gradient propagation\",\n    \"machine learning domains\"\n]",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "Recent advances in deep learning architectures have significantly transformed neural network performance in complex pattern recognition tasks. Convolutional neural networks (CNNs) and transformer models demonstrate remarkable capabilities in feature extraction, with attention mechanisms enabling more nuanced representation learning. Specifically, hybrid architectures combining residual connections with self-attention layers have shown promising results in reducing gradient propagation challenges while maintaining high representational capacity across diverse machine learning domains."
+      },
+      "solution_criteria": [
+        "Correctly identify core technical topics",
+        "Generate topics as a JSON array of strings",
+        "Capture both broad and specific technical concepts"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+      "scenario": "Technical computer science research excerpt discussing machine learning methodologies with overlapping technical concepts"
+    },
+    "score": 9,
+    "reasoning": "The solution successfully extracts technical topics from the text, meeting all mandatory requirements. The topics capture both broad and specific technical concepts related to deep learning and neural networks. The JSON array is correctly formatted with string topics, and the extraction covers the key themes of the passage."
+  },
+  {
+    "output": "[\n    \"Renaissance art\",\n    \"Interdisciplinary dialogue\",\n    \"Visual representation\",\n    \"Philosophical inquiry\",\n    \"Scientific observation\", \n    \"Leonardo da Vinci\",\n    \"Anatomical precision\",\n    \"Aesthetic expression\",\n    \"Sfumato technique\",\n    \"Chiaroscuro technique\",\n    \"Anatomical sketches\",\n    \"Mathematical perspective\",\n    \"Spiritual symbolism\"\n]",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "During the Renaissance, art became a profound interdisciplinary dialogue between visual representation, philosophical inquiry, and emerging scientific observation. Painters like Leonardo da Vinci epitomized this convergence, seamlessly blending anatomical precision with aesthetic expression through techniques such as sfumato and chiaroscuro. His works, particularly anatomical sketches and paintings like 'The Last Supper', demonstrated how artistic practice could simultaneously explore human physiology, spiritual symbolism, and mathematical perspective, challenging traditional boundaries between disciplines."
+      },
+      "solution_criteria": [
+        "Accurately capture broad interdisciplinary topics",
+        "Identify specific conceptual themes present in the text",
+        "Extract topics that reflect the scholarly nature of the passage"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+      "scenario": "Humanities passage about Renaissance art with interdisciplinary themes requiring nuanced topic extraction"
+    },
+    "score": 9,
+    "reasoning": "The solution successfully extracts topics from the scholarly text, meeting all mandatory requirements. The topics cover art, science, philosophy, and specific techniques, demonstrating a nuanced understanding of the passage's interdisciplinary themes. The JSON array format is correct, and each topic is a clean string without additional commentary."
+  },
+  {
+    "output": "[\n    \"Digital technologies in anthropological research\",\n    \"Digital ethnography\",\n    \"Online communities\",\n    \"Social media interactions\",\n    \"Virtual cultural spaces\",\n    \"Transnational identities\",\n    \"Digital subcultures\",\n    \"Communication patterns\",\n    \"Machine learning in anthropology\",\n    \"Big data analytics\",\n    \"Cross-cultural comparative studies\",\n    \"Human social dynamics\",\n    \"Cultural adaptation mechanisms\"\n]",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "Digital technologies are fundamentally reshaping anthropological research methodologies in the 21st century. Ethnographic fieldwork now increasingly incorporates digital ethnography, where researchers analyze online communities, social media interactions, and virtual cultural spaces. This technological integration allows anthropologists to explore transnational identities, digital subcultures, and emergent communication patterns that transcend traditional geographic boundaries. Machine learning and big data analytics are enabling more nuanced cross-cultural comparative studies, providing unprecedented insights into human social dynamics and cultural adaptation mechanisms."
+      },
+      "solution_criteria": [
+        "Correctly identify core thematic topics from the scholarly text",
+        "Represent topics as a JSON array of distinct, precise strings",
+        "Capture both broad and specific themes present in the passage"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+      "scenario": "Interdisciplinary social science paper exploring technological impact on cultural anthropology requiring precise thematic parsing"
+    },
+    "score": 9,
+    "reasoning": "The solution fully meets all mandatory and secondary criteria. It successfully extracts topics as a clean JSON array of strings, captures the key themes from the scholarly text, and provides a nuanced representation of the passage's content without extraneous information."
+  },
+  {
+    "output": "[\n    \"Epistemology\",\n    \"Human Perception\",\n    \"Rationality\",\n    \"Philosophy of Knowledge\",\n    \"Kant\",\n    \"Descartes\",\n    \"Empiricism\",\n    \"Rationalism\",\n    \"Subjective Experience\",\n    \"Objective Reasoning\",\n    \"Cognitive Processes\",\n    \"Truth\",\n    \"Belief Formation\"\n]",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "Epistemological inquiry into the nature of knowledge reveals profound complexities in understanding human perception and rationality. Philosophers like Kant and Descartes have long grappled with the fundamental questions of how we acquire knowledge, challenging traditional empiricist and rationalist frameworks. The dialectic between subjective experience and objective reasoning creates intricate epistemological landscapes that challenge our understanding of truth, belief formation, and the fundamental limits of human cognitive processes."
+      },
+      "solution_criteria": [
+        "Identify core philosophical topics mentioned",
+        "Capture key epistemological concepts",
+        "Represent philosophical thinkers and theories"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+      "scenario": "Philosophical text analyzing epistemological theories with abstract and conceptual topic identification challenges"
+    },
+    "score": 9,
+    "reasoning": "The solution fully meets all mandatory requirements by providing a JSON array of string topics extracted from the text. It captures the core philosophical and epistemological concepts, represents key thinkers, and follows the specified extraction guidelines precisely. The topics comprehensively reflect the passage's content without additional commentary."
+  }
+]
