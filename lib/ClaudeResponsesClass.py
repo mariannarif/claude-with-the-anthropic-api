@@ -30,26 +30,37 @@ class ClaudeResponses:
         save_history (bool): whether to save user and assistant messages to self.messages.
     '''
     def __init__(self, 
-                 model: str = "Claude Haiku 3.5",
+                 model: str = "Claude Sonnet 4.5",
                  system_prompt: str | None= None,
                  model_params: dict | None = None,
                  tools: list | None = None,
                  save_history: bool = True) -> None:
         match model:
-            case "Claude Opus 4.1" | "Opus 4.1" | "claude-opus-4-1-20250805":
-                self.model = "claude-opus-4-1-20250805"
-            case "Claude Opus 4" | "Opus 4" | "claude-opus-4-20250514":
-                self.model = "claude-opus-4-20250514"
-            case "Claude Sonnet 4" | "Sonnet 4" | "claude-sonnet-4-20250514":
-                self.model = "claude-sonnet-4-20250514"
-            case "Claude Sonnet 3.7" | "Sonnet 3.7" | "claude-3-7-sonnet-20250219":
-                self.model = "claude-3-7-sonnet-20250219"
-            case "Claude Haiku 3.5" | "Haiku 3.5" | "claude-3-5-haiku-20241022":
-                self.model = "claude-3-5-haiku-20241022"
-            case "Claude Haiku 3" | "Haiku 3" | "claude-3-haiku-20240307":
-                self.model = "claude-3-haiku-20240307"
+            case "Claude Fable 5.1" | "Fable 5.1" | "claude-fable-5-1":
+                self.model = "claude-fable-5-1"
+            case "Claude Opus 5" | "Opus 5" | "claude-opus-5":
+                self.model = "claude-opus-5"
+            case "Claude Sonnet 5" | "Sonnet 5" | "claude-sonnet-5":
+                self.model = "claude-sonnet-5"
+            case "Claude Fable 5" | "Fable 5" | "claude-fable-5":
+                self.model = "claude-fable-5"
+            case "Claude Opus 4.8" | "Opus 4.8" | "claude-opus-4-8":
+                self.model = "claude-opus-4-8"
+            case "Claude Opus 4.7" | "Opus 4.7" | "claude-opus-4-7":
+                self.model = "claude-opus-4-7"
+            case "Claude Sonnet 4.6" | "Sonnet 4.6" | "claude-sonnet-4-6":
+                self.model = "claude-sonnet-4-6"
+            case "Claude Opus 4.6" | "Opus 4.6" | "claude-opus-4-6":
+                self.model = "claude-opus-4-6"
+            case "Claude Opus 4.5" | "Opus 4.5" | "claude-opus-4-5-20251101":
+                self.model = "claude-opus-4-5-20251101"
+            case "Claude Haiku 4.5" | "Haiku 4.5" | "claude-haiku-4-5-20251001":
+                self.model = "claude-haiku-4-5-20251001"
+            case "Claude Sonnet 4.5" | "Sonnet 4.5" | "claude-sonnet-4-5-20250929":
+                self.model = "claude-sonnet-4-5-20250929"
             case _:
                 self.model = model
+           
     
         self.system_prompt = system_prompt
         self.model_params = model_params
@@ -138,8 +149,8 @@ class ClaudeResponses:
              user_input: str | None = None,
              messages: list[dict] | None = None,
              model: str | None = None,
-             return_text: bool = False,
-             print_partial_response: bool = False
+             return_text: bool = True,
+             print_partial_response: bool = False,
              **kwargs):
         '''
         Sends a message to the model and returns the response.
@@ -202,8 +213,6 @@ class ClaudeResponses:
             if self.save_history:
                 self.add_user_message(tool_result_blocks)
             
-
-        
         final_response = "\n".join(text_blocks) if text_blocks else ""
 
         if return_text:

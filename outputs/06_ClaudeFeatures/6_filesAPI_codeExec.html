@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Streaming churn analysis · code execution</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #e9e6e2;
+      color: #1c1b18;
+      font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 44rem;
+      margin: 0 auto;
+      padding: 1.5rem 0.1rem 1.5rem;
+    }
+    .kicker {
+      margin: 0;
+      color: #8a5a12;
+      font-size: 0.75rem;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0.25rem 0 0;
+      font-size: 1.7rem;
+      font-weight: 620;
+      letter-spacing: -0.025em;
+    }
+    h2 {
+      margin: 1.4rem 0 0.6rem;
+      font-size: 1rem;
+      font-weight: 650;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #6d675f;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.35rem 1.75rem;
+      margin: 1.15rem 0 0;
+    }
+    .meta div { margin: 0; }
+    .meta dt {
+      font-size: 0.7rem;
+      color: #6d675f;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .meta dd { margin: 0.12rem 0 0; font-size: 0.92rem; }
+    code, pre, .path, .term-bar, .tool-id {
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    }
+    .meta code { font-size: 0.8rem; }
+    .text-block {
+      background: #fff6dc;
+      border-left: 3px solid #e0a31a;
+      border-radius: 0 10px 10px 0;
+      padding: 0.85rem 1rem 1rem;
+    }
+    .block-label {
+      margin: 0 0 0.4rem;
+      font-size: 0.7rem;
+      font-weight: 650;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #8a5a12;
+    }
+    .text-block h3 {
+      margin: 0 0 0.65rem;
+      font-size: 1.7rem;
+      letter-spacing: -0.01em;
+    }
+    .text-block p { margin: 0.55rem 0; }
+    .text-block p:last-child { margin-bottom: 0; }
+    .text-block ul, .text-block ol { margin: 0.35rem 0 0.2rem; padding-left: 1.2rem; }
+    .text-block li { margin: 0.28rem 0; }
+    .tool {
+      background: #fff;
+      border: 1px solid #e4e0d8;
+      border-radius: 10px;
+      padding: 0.9rem 1rem 1rem;
+      margin: 0 0 0.7rem;
+    }
+    .tool header, .figure header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem 0.8rem;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 650;
+      padding: 0.12rem 0.45rem;
+      border-radius: 999px;
+    }
+    .badge.bash { background: #e5f2ea; color: #1d6b42; }
+    .badge.editor { background: #e7eef8; color: #234a86; }
+    .tool-id { font-size: 0.72rem; color: #6d675f; word-break: break-all; }
+    .note { margin: 0.7rem 0 0.65rem; color: #3f3b36; }
+    .path {
+      margin: 0 0 0.5rem;
+      font-size: 0.8rem;
+      color: #2c2a26;
+    }
+    .path span { color: #6d675f; margin-right: 0.35rem; }
+    pre {
+      margin: 0;
+      overflow: auto;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      max-height: 26rem;
+      white-space: pre;
+    }
+    pre.code {
+      background: #f6f4ef;
+      color: #51504c;
+      border-radius: 8px;
+      padding: 0.75rem 0.85rem;
+    }
+    .terminal {
+      margin-top: 0.75rem;
+      background: #232320;
+      color: #eceae3;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .term-bar {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding: 0.45rem 0.75rem;
+      font-size: 0.7rem;
+      color: #b7b3aa;
+      border-bottom: 1px solid #3a3934;
+    }
+    .rc { color: #8fd0a8; }
+    .terminal pre { padding: 0.75rem 0.85rem; }
+    .stream-label {
+      margin: 0;
+      padding: 0.35rem 0.75rem 0;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #e0b56a;
+      border-top: 1px solid #3a3934;
+    }
+    pre.stderr { color: #f0d3a4; padding-top: 0.35rem; }
+    .file-note {
+      margin: 0;
+      padding: 0.6rem 0.75rem;
+      border-top: 1px solid #3a3934;
+      color: #c9d7c4;
+      font-size: 0.82rem;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+    }
+    .editor-result {
+      margin: 0.7rem 0 0;
+      font-size: 0.84rem;
+      color: #1d6b42;
+    }
+    details.code-fold summary {
+      cursor: pointer;
+      width: fit-content;
+      margin: 0 0 0.5rem;
+      padding: 0.35rem 0.8rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #fff;
+      background: #234a86;
+      border: 1px solid #1a3966;
+      border-radius: 6px;
+      list-style: none;
+      user-select: none;
+    }
+    details.code-fold summary:hover { background: #1a3966; }
+    details.code-fold summary::before { content: "▸ "; }
+    details.code-fold[open] summary::before { content: "▾ "; }
+    .figure {
+      background: #fff;
+      border: 1px solid #e4e0d8;
+      border-radius: 10px;
+      padding: 0.9rem 1rem 1rem;
+    }
+    .zoom-trigger {
+      display: block;
+      width: 100%;
+      margin-top: 0.7rem;
+      padding: 0;
+      border: 0;
+      background: none;
+      cursor: zoom-in;
+      border-radius: 6px;
+    }
+    .zoom-trigger img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+    .zoom-hint {
+      margin: 0.4rem 0 0;
+      font-size: 0.78rem;
+      color: #6d675f;
+    }
+    .zoom {
+      width: min(96vw, 1400px);
+      max-width: 96vw;
+      max-height: 94vh;
+      padding: 2.75rem 1rem 1rem;
+      border: 0;
+      border-radius: 10px;
+      background: #1c1b18;
+    }
+    .zoom::backdrop { background: rgba(20, 18, 14, 0.82); }
+    .zoom img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: calc(94vh - 4rem);
+      object-fit: contain;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 6px;
+    }
+    .zoom form { margin: 0; }
+    .zoom .exit {
+      position: fixed;
+      top: 0.85rem;
+      right: 0.85rem;
+      z-index: 2;
+      padding: 0.4rem 0.9rem;
+      font: 600 0.85rem ui-sans-serif, system-ui, sans-serif;
+      color: #1c1b18;
+      background: #fff;
+      border: 1px solid #d9d4cb;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .zoom .exit:hover { background: #f4f2ec; }
+    details.code-fold summary::-webkit-details-marker { display: none; }
+    details .open { display: none; }
+    details[open] .open { display: inline; }
+    details[open] .closed { display: none; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="kicker">Code execution trace</p>
+    <h1>Streaming churn analysis</h1>
+    <dl class="meta">
+      <div><dt>Message</dt><dd><code>msg_011Cg4a5i8pZiryRXMBPCC1J</code></dd></div>
+      <div><dt>Model</dt><dd>claude-sonnet-4-5-20250929</dd></div>
+      <div><dt>Tokens</dt><dd>42,093 in · 5,131 out</dd></div>
+    </dl>
+  </header>
+
+  <section>
+    <h2>1 · Intent</h2>
+    <div class="text-block">
+      <p class="block-label">TextBlock</p>
+      <p>I'll analyze the churn drivers in the streaming.csv file.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>2 · Inspect the CSV</h2>
+    
+<article class="tool">
+  <header>
+    <span class="badge bash">bash_code_execution</span>
+    <code class="tool-id">srvtoolu_01DxpMveLsfBnyd8PQN367Bx</code>
+  </header>
+  <p class="note">Prints the first 20 rows of streaming.csv, then counts the lines in the file.</p>
+  <pre class="code"><code>head -20 "$INPUT_DIR/streaming.csv" &amp;&amp; wc -l "$INPUT_DIR/streaming.csv"</code></pre>
+  <div class="terminal">
+<div class="term-bar">
+<span>BashCodeExecutionToolResultBlock · srvtoolu_01DxpMveLsfBnyd8PQN367Bx</span>
+<span class="rc">return 0</span>
+</div>
+<pre class="stdout">UserID,SubscriptionTier,TotalViewingHoursLastMonth,TopGenre,BingeWatchingSessionsLastMonth,NumberOfUniqueTitlesWatchedLastMonth,AverageSessionDurationMinutes,CustomerServiceInteractionsLastYear,MonthlyCost,Churned
+USER_00001,Basic,47.9,Comedy,5,15,32.6,3,7.99,0
+USER_00002,Premium,41.4,Drama,5,9,45.7,3,17.99,0
+USER_00003,Standard,33.6,Action,1,7,32.3,4,12.99,1
+USER_00004,Standard,115.6,Action,12,33,57.3,1,12.99,0
+USER_00005,Basic,93.8,Documentary,9,27,90.0,2,7.99,1
+USER_00006,Basic,105.6,Romance,10,27,80.0,2,7.99,0
+USER_00007,Basic,106.6,Thriller,8,23,53.1,3,7.99,0
+USER_00008,Premium,93.6,Documentary,11,27,55.1,2,17.99,0
+USER_00009,Standard,138.9,Comedy,12,36,86.4,1,12.99,0
+USER_00010,Standard,56.9,Action,6,17,56.2,2,12.99,0
+USER_00011,Basic,24.5,Horror,5,9,38.9,4,7.99,1
+USER_00012,Premium,117.5,Documentary,11,25,75.5,1,17.99,0
+USER_00013,Standard,109.2,Documentary,11,30,66.1,2,12.99,0
+USER_00014,Basic,31.5,Horror,2,1,43.1,5,7.99,1
+USER_00015,Basic,51.1,SciFi,5,22,50.1,3,7.99,1
+USER_00016,Basic,66.3,Romance,6,26,39.5,3,7.99,1
+USER_00017,Basic,104.7,Action,12,33,94.1,2,7.99,1
+USER_00018,Standard,74.5,SciFi,6,6,66.0,4,12.99,1
+USER_00019,Standard,63.7,Romance,6,13,73.1,3,12.99,1
+501 /files/input/679b29d1c7bff7b6/streaming.csv
+</pre>
+</div>
+</article>
+
+  </section>
+
+  <section>
+    <h2>3 · Explore the dataset</h2>
+    
+<article class="tool">
+  <header>
+    <span class="badge editor">text_editor_code_execution</span>
+    <code class="tool-id">srvtoolu_01KjiZ22GtryVi9FikfFkqtA</code>
+  </header>
+  <p class="note">Creates a script that loads streaming.csv and prints shape, columns, churn rate, missing values, dtypes, and summary stats.</p>
+  <p class="path"><span>create</span> /tmp/churn_analysis.py</p><pre class="code"><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import LabelEncoder
+import os
+
+# Load data
+df = pd.read_csv(os.environ['INPUT_DIR'] + '/streaming.csv')
+
+print("Data shape:", df.shape)
+print("\nColumns:", df.columns.tolist())
+print("\nChurn rate:", df['Churned'].mean())
+print("\nMissing values:\n", df.isnull().sum())
+print("\nData types:\n", df.dtypes)
+print("\nBasic stats:\n", df.describe())
+</code></pre>
+  <p class="editor-result">TextEditorCodeExecutionToolResultBlock · srvtoolu_01KjiZ22GtryVi9FikfFkqtA · file created · is_file_update=False</p>
+</article>
+
+    
+<article class="tool">
+  <header>
+    <span class="badge bash">bash_code_execution</span>
+    <code class="tool-id">srvtoolu_019CxPPnd7xSmXvLKk2kJZU7</code>
+  </header>
+  <p class="note">Runs that script from /tmp so the printed profile comes back as terminal output.</p>
+  <pre class="code"><code>cd /tmp &amp;&amp; python churn_analysis.py</code></pre>
+  <div class="terminal">
+<div class="term-bar">
+<span>BashCodeExecutionToolResultBlock · srvtoolu_019CxPPnd7xSmXvLKk2kJZU7</span>
+<span class="rc">return 0</span>
+</div>
+<pre class="stdout">Data shape: (500, 10)
+
+Columns: ['UserID', 'SubscriptionTier', 'TotalViewingHoursLastMonth', 'TopGenre', 'BingeWatchingSessionsLastMonth', 'NumberOfUniqueTitlesWatchedLastMonth', 'AverageSessionDurationMinutes', 'CustomerServiceInteractionsLastYear', 'MonthlyCost', 'Churned']
+
+Churn rate: 0.386
+
+Missing values:
+ UserID                                  0
+SubscriptionTier                        0
+TotalViewingHoursLastMonth              0
+TopGenre                                0
+BingeWatchingSessionsLastMonth          0
+NumberOfUniqueTitlesWatchedLastMonth    0
+AverageSessionDurationMinutes           0
+CustomerServiceInteractionsLastYear     0
+MonthlyCost                             0
+Churned                                 0
+dtype: int64
+
+Data types:
+ UserID                                   object
+SubscriptionTier                         object
+TotalViewingHoursLastMonth              float64
+TopGenre                                 object
+BingeWatchingSessionsLastMonth            int64
+NumberOfUniqueTitlesWatchedLastMonth      int64
+AverageSessionDurationMinutes           float64
+CustomerServiceInteractionsLastYear       int64
+MonthlyCost                             float64
+Churned                                   int64
+dtype: object
+
+Basic stats:
+        TotalViewingHoursLastMonth  ...     Churned
+count                  500.000000  ...  500.000000
+mean                    76.796000  ...    0.386000
+std                     32.910135  ...    0.487318
+min                      0.000000  ...    0.000000
+25%                     52.375000  ...    0.000000
+50%                     74.550000  ...    0.000000
+75%                     99.900000  ...    1.000000
+max                    161.800000  ...    1.000000
+
+[8 rows x 7 columns]
+</pre>
+</div>
+</article>
+
+  </section>
+
+  <section>
+    <h2>4 · Measure churn drivers</h2>
+    
+<article class="tool">
+  <header>
+    <span class="badge editor">text_editor_code_execution</span>
+    <code class="tool-id">srvtoolu_01GsriDpuYfz6NjirYnGVUmC</code>
+  </header>
+  <p class="note">Creates a script that encodes tier and genre, fits a random forest on Churned, and compares churned versus retained users.</p>
+  <p class="path"><span>create</span> /tmp/feature_importance.py</p><details class="code-fold"><summary><span class="closed">Show code</span><span class="open">Hide code</span></summary><pre class="code"><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import LabelEncoder
+import os
+
+# Load data
+df = pd.read_csv(os.environ['INPUT_DIR'] + '/streaming.csv')
+
+# Prepare features for modeling
+df_model = df.copy()
+le_tier = LabelEncoder()
+le_genre = LabelEncoder()
+df_model['SubscriptionTier_enc'] = le_tier.fit_transform(df_model['SubscriptionTier'])
+df_model['TopGenre_enc'] = le_genre.fit_transform(df_model['TopGenre'])
+
+# Features for modeling
+feature_cols = ['SubscriptionTier_enc', 'TotalViewingHoursLastMonth', 'TopGenre_enc',
+                'BingeWatchingSessionsLastMonth', 'NumberOfUniqueTitlesWatchedLastMonth',
+                'AverageSessionDurationMinutes', 'CustomerServiceInteractionsLastYear', 'MonthlyCost']
+
+X = df_model[feature_cols]
+y = df_model['Churned']
+
+# Train Random Forest
+rf = RandomForestClassifier(n_estimators=200, max_depth=10, random_state=42)
+rf.fit(X, y)
+
+# Feature importance
+feature_importance = pd.DataFrame({
+    'feature': feature_cols,
+    'importance': rf.feature_importances_
+}).sort_values('importance', ascending=False)
+
+print("Feature Importance:")
+print(feature_importance)
+
+# Analyze key drivers
+print("\n" + "="*50)
+print("CHURN ANALYSIS BY KEY FEATURES")
+print("="*50)
+
+# 1. Viewing Hours
+print("\n1. Total Viewing Hours:")
+churned_hours = df[df['Churned']==1]['TotalViewingHoursLastMonth']
+retained_hours = df[df['Churned']==0]['TotalViewingHoursLastMonth']
+print(f"  Churned: {churned_hours.mean():.1f} hrs (median: {churned_hours.median():.1f})")
+print(f"  Retained: {retained_hours.mean():.1f} hrs (median: {retained_hours.median():.1f})")
+
+# 2. Customer Service Interactions
+print("\n2. Customer Service Interactions:")
+churned_cs = df[df['Churned']==1]['CustomerServiceInteractionsLastYear']
+retained_cs = df[df['Churned']==0]['CustomerServiceInteractionsLastYear']
+print(f"  Churned: {churned_cs.mean():.2f} interactions (median: {churned_cs.median():.0f})")
+print(f"  Retained: {retained_cs.mean():.2f} interactions (median: {retained_cs.median():.0f})")
+
+# 3. Subscription Tier
+print("\n3. Subscription Tier:")
+tier_churn = df.groupby('SubscriptionTier')['Churned'].agg(['sum', 'count', 'mean'])
+tier_churn.columns = ['Churned_Count', 'Total', 'Churn_Rate']
+print(tier_churn)
+
+# 4. Unique Titles
+print("\n4. Unique Titles Watched:")
+churned_titles = df[df['Churned']==1]['NumberOfUniqueTitlesWatchedLastMonth']
+retained_titles = df[df['Churned']==0]['NumberOfUniqueTitlesWatchedLastMonth']
+print(f"  Churned: {churned_titles.mean():.1f} titles (median: {churned_titles.median():.1f})")
+print(f"  Retained: {retained_titles.mean():.1f} titles (median: {retained_titles.median():.1f})")
+
+# 5. Binge Watching
+print("\n5. Binge Watching Sessions:")
+churned_binge = df[df['Churned']==1]['BingeWatchingSessionsLastMonth']
+retained_binge = df[df['Churned']==0]['BingeWatchingSessionsLastMonth']
+print(f"  Churned: {churned_binge.mean():.1f} sessions (median: {churned_binge.median():.1f})")
+print(f"  Retained: {retained_binge.mean():.1f} sessions (median: {retained_binge.median():.1f})")
+
+# Save for plotting
+np.save('/tmp/feature_importance.npy', feature_importance.values)
+feature_importance.to_csv('/tmp/feature_importance.csv', index=False)
+</code></pre></details>
+  <p class="editor-result">TextEditorCodeExecutionToolResultBlock · srvtoolu_01GsriDpuYfz6NjirYnGVUmC · file created · is_file_update=False</p>
+</article>
+
+    
+<article class="tool">
+  <header>
+    <span class="badge bash">bash_code_execution</span>
+    <code class="tool-id">srvtoolu_01TvTHRmDv37sGFoHM67jXqC</code>
+  </header>
+  <p class="note">Runs the model script and prints importance scores plus the churned-versus-retained comparisons.</p>
+  <pre class="code"><code>cd /tmp &amp;&amp; python feature_importance.py</code></pre>
+  <div class="terminal">
+<div class="term-bar">
+<span>BashCodeExecutionToolResultBlock · srvtoolu_01TvTHRmDv37sGFoHM67jXqC</span>
+<span class="rc">return 0</span>
+</div>
+<pre class="stdout">Feature Importance:
+                                feature  importance
+1            TotalViewingHoursLastMonth    0.238496
+5         AverageSessionDurationMinutes    0.214907
+4  NumberOfUniqueTitlesWatchedLastMonth    0.156730
+2                          TopGenre_enc    0.110867
+3        BingeWatchingSessionsLastMonth    0.110369
+6   CustomerServiceInteractionsLastYear    0.096685
+7                           MonthlyCost    0.038958
+0                  SubscriptionTier_enc    0.032989
+
+==================================================
+CHURN ANALYSIS BY KEY FEATURES
+==================================================
+
+1. Total Viewing Hours:
+  Churned: 66.6 hrs (median: 67.0)
+  Retained: 83.2 hrs (median: 79.9)
+
+2. Customer Service Interactions:
+  Churned: 3.18 interactions (median: 3)
+  Retained: 2.49 interactions (median: 2)
+
+3. Subscription Tier:
+                  Churned_Count  Total  Churn_Rate
+SubscriptionTier                                  
+Basic                        90    207    0.434783
+Premium                      20     83    0.240964
+Standard                     83    210    0.395238
+
+4. Unique Titles Watched:
+  Churned: 19.5 titles (median: 20.0)
+  Retained: 23.7 titles (median: 23.0)
+
+5. Binge Watching Sessions:
+  Churned: 6.2 sessions (median: 6.0)
+  Retained: 7.7 sessions (median: 8.0)
+</pre>
+</div>
+</article>
+
+  </section>
+
+  <section>
+    <h2>5 · Build the plot</h2>
+    
+<article class="tool">
+  <header>
+    <span class="badge editor">text_editor_code_execution</span>
+    <code class="tool-id">srvtoolu_016PzUBtvqeaLqcss591EGnY</code>
+  </header>
+  <p class="note">Creates a script that draws an eight-panel figure of the churn drivers and copies the PNG into the output directory.</p>
+  <p class="path"><span>create</span> /tmp/create_plot.py</p><details class="code-fold"><summary><span class="closed">Show code</span><span class="open">Hide code</span></summary><pre class="code"><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import os
+
+# Load data
+df = pd.read_csv(os.environ['INPUT_DIR'] + '/streaming.csv')
+
+# Set style
+sns.set_style("whitegrid")
+plt.rcParams['figure.facecolor'] = 'white'
+
+# Create comprehensive dashboard
+fig = plt.figure(figsize=(20, 12))
+gs = fig.add_gridspec(3, 3, hspace=0.35, wspace=0.3)
+
+# Title
+fig.suptitle('Comprehensive Churn Analysis - Major Drivers', fontsize=20, fontweight='bold', y=0.98)
+
+# 1. Feature Importance (Top left - larger)
+ax1 = fig.add_subplot(gs[0, :2])
+feature_imp = pd.read_csv('/tmp/feature_importance.csv')
+# Rename for readability
+feature_names = {
+    'TotalViewingHoursLastMonth': 'Viewing Hours',
+    'AverageSessionDurationMinutes': 'Avg Session Duration',
+    'NumberOfUniqueTitlesWatchedLastMonth': 'Unique Titles',
+    'TopGenre_enc': 'Genre Preference',
+    'BingeWatchingSessionsLastMonth': 'Binge Sessions',
+    'CustomerServiceInteractionsLastYear': 'CS Interactions',
+    'MonthlyCost': 'Monthly Cost',
+    'SubscriptionTier_enc': 'Subscription Tier'
+}
+feature_imp['feature'] = feature_imp['feature'].map(feature_names)
+colors = ['#d73027' if x &gt; 0.15 else '#fc8d59' if x &gt; 0.10 else '#fee090' for x in feature_imp['importance']]
+bars = ax1.barh(feature_imp['feature'], feature_imp['importance'], color=colors)
+ax1.set_xlabel('Importance Score', fontsize=12, fontweight='bold')
+ax1.set_title('Feature Importance (Random Forest)', fontsize=14, fontweight='bold', pad=10)
+ax1.invert_yaxis()
+for i, v in enumerate(feature_imp['importance']):
+    ax1.text(v + 0.005, i, f'{v:.3f}', va='center', fontsize=10)
+
+# 2. Viewing Hours Distribution
+ax2 = fig.add_subplot(gs[0, 2])
+churned = df[df['Churned']==1]['TotalViewingHoursLastMonth']
+retained = df[df['Churned']==0]['TotalViewingHoursLastMonth']
+ax2.hist([retained, churned], bins=20, label=['Retained', 'Churned'], 
+         color=['#4daf4a', '#e41a1c'], alpha=0.7, edgecolor='black')
+ax2.set_xlabel('Viewing Hours', fontsize=10, fontweight='bold')
+ax2.set_ylabel('Count', fontsize=10, fontweight='bold')
+ax2.set_title('Viewing Hours Distribution', fontsize=12, fontweight='bold')
+ax2.legend()
+ax2.axvline(churned.mean(), color='#e41a1c', linestyle='--', linewidth=2, label='Churned Mean')
+ax2.axvline(retained.mean(), color='#4daf4a', linestyle='--', linewidth=2, label='Retained Mean')
+
+# 3. Customer Service Interactions
+ax3 = fig.add_subplot(gs[1, 0])
+cs_data = df.groupby(['CustomerServiceInteractionsLastYear', 'Churned']).size().unstack(fill_value=0)
+cs_pct = cs_data.div(cs_data.sum(axis=1), axis=0) * 100
+cs_pct.plot(kind='bar', stacked=True, ax=ax3, color=['#4daf4a', '#e41a1c'], 
+            legend=False, edgecolor='black', linewidth=0.5)
+ax3.set_xlabel('CS Interactions (Last Year)', fontsize=10, fontweight='bold')
+ax3.set_ylabel('Percentage (%)', fontsize=10, fontweight='bold')
+ax3.set_title('Churn Rate by CS Interactions', fontsize=12, fontweight='bold')
+ax3.set_xticklabels(ax3.get_xticklabels(), rotation=0)
+ax3.legend(['Retained', 'Churned'], loc='upper left')
+
+# 4. Subscription Tier
+ax4 = fig.add_subplot(gs[1, 1])
+tier_data = df.groupby('SubscriptionTier')['Churned'].agg(['sum', 'count'])
+tier_data['retained'] = tier_data['count'] - tier_data['sum']
+tier_data[['retained', 'sum']].plot(kind='bar', ax=ax4, color=['#4daf4a', '#e41a1c'],
+                                     edgecolor='black', linewidth=1)
+ax4.set_xlabel('Subscription Tier', fontsize=10, fontweight='bold')
+ax4.set_ylabel('Count', fontsize=10, fontweight='bold')
+ax4.set_title('Churn by Subscription Tier', fontsize=12, fontweight='bold')
+ax4.set_xticklabels(ax4.get_xticklabels(), rotation=0)
+ax4.legend(['Retained', 'Churned'])
+# Add churn rate on top
+for i, (idx, row) in enumerate(tier_data.iterrows()):
+    churn_rate = row['sum'] / row['count'] * 100
+    ax4.text(i, row['count'] + 5, f'{churn_rate:.1f}%', ha='center', fontweight='bold')
+
+# 5. Unique Titles Watched
+ax5 = fig.add_subplot(gs[1, 2])
+titles_churned = df[df['Churned']==1]['NumberOfUniqueTitlesWatchedLastMonth']
+titles_retained = df[df['Churned']==0]['NumberOfUniqueTitlesWatchedLastMonth']
+bp = ax5.boxplot([titles_retained, titles_churned], labels=['Retained', 'Churned'],
+                  patch_artist=True, widths=0.6)
+bp['boxes'][0].set_facecolor('#4daf4a')
+bp['boxes'][1].set_facecolor('#e41a1c')
+for box in bp['boxes']:
+    box.set_alpha(0.7)
+ax5.set_ylabel('Unique Titles', fontsize=10, fontweight='bold')
+ax5.set_title('Unique Titles Watched', fontsize=12, fontweight='bold')
+ax5.grid(axis='y', alpha=0.3)
+
+# 6. Binge Watching Sessions
+ax6 = fig.add_subplot(gs[2, 0])
+binge_churned = df[df['Churned']==1]['BingeWatchingSessionsLastMonth']
+binge_retained = df[df['Churned']==0]['BingeWatchingSessionsLastMonth']
+bp2 = ax6.boxplot([binge_retained, binge_churned], labels=['Retained', 'Churned'],
+                   patch_artist=True, widths=0.6)
+bp2['boxes'][0].set_facecolor('#4daf4a')
+bp2['boxes'][1].set_facecolor('#e41a1c')
+for box in bp2['boxes']:
+    box.set_alpha(0.7)
+ax6.set_ylabel('Binge Sessions', fontsize=10, fontweight='bold')
+ax6.set_title('Binge Watching Sessions', fontsize=12, fontweight='bold')
+ax6.grid(axis='y', alpha=0.3)
+
+# 7. Session Duration
+ax7 = fig.add_subplot(gs[2, 1])
+duration_churned = df[df['Churned']==1]['AverageSessionDurationMinutes']
+duration_retained = df[df['Churned']==0]['AverageSessionDurationMinutes']
+bp3 = ax7.boxplot([duration_retained, duration_churned], labels=['Retained', 'Churned'],
+                   patch_artist=True, widths=0.6)
+bp3['boxes'][0].set_facecolor('#4daf4a')
+bp3['boxes'][1].set_facecolor('#e41a1c')
+for box in bp3['boxes']:
+    box.set_alpha(0.7)
+ax7.set_ylabel('Minutes', fontsize=10, fontweight='bold')
+ax7.set_title('Average Session Duration', fontsize=12, fontweight='bold')
+ax7.grid(axis='y', alpha=0.3)
+
+# 8. Key Metrics Summary
+ax8 = fig.add_subplot(gs[2, 2])
+ax8.axis('off')
+
+# Calculate metrics
+metrics = {
+    'Overall Churn Rate': f"{df['Churned'].mean()*100:.1f}%",
+    'Avg Viewing (Churned)': f"{df[df['Churned']==1]['TotalViewingHoursLastMonth'].mean():.1f} hrs",
+    'Avg Viewing (Retained)': f"{df[df['Churned']==0]['TotalViewingHoursLastMonth'].mean():.1f} hrs",
+    'CS Interactions (Churned)': f"{df[df['Churned']==1]['CustomerServiceInteractionsLastYear'].mean():.2f}",
+    'CS Interactions (Retained)': f"{df[df['Churned']==0]['CustomerServiceInteractionsLastYear'].mean():.2f}",
+    'Basic Tier Churn': f"{df[df['SubscriptionTier']=='Basic']['Churned'].mean()*100:.1f}%",
+    'Premium Tier Churn': f"{df[df['SubscriptionTier']=='Premium']['Churned'].mean()*100:.1f}%",
+}
+
+y_pos = 0.95
+ax8.text(0.5, y_pos, 'KEY FINDINGS', ha='center', fontsize=14, fontweight='bold',
+         bbox=dict(boxstyle='round', facecolor='lightgray', alpha=0.5))
+y_pos -= 0.12
+
+for key, value in metrics.items():
+    ax8.text(0.05, y_pos, f'{key}:', fontsize=10, fontweight='bold')
+    ax8.text(0.95, y_pos, value, fontsize=10, ha='right',
+             bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.3))
+    y_pos -= 0.11
+
+# Add insights
+y_pos -= 0.05
+ax8.text(0.5, y_pos, 'TOP 3 DRIVERS:', ha='center', fontsize=11, fontweight='bold',
+         bbox=dict(boxstyle='round', facecolor='lightcoral', alpha=0.5))
+y_pos -= 0.08
+insights = [
+    '1. Low viewing hours',
+    '2. Short session duration',
+    '3. High CS interactions'
+]
+for insight in insights:
+    ax8.text(0.05, y_pos, insight, fontsize=9, style='italic')
+    y_pos -= 0.08
+
+plt.savefig('/tmp/churn_analysis_dashboard.png', dpi=300, bbox_inches='tight', facecolor='white')
+print("Dashboard saved to /tmp/churn_analysis_dashboard.png")
+
+# Copy to output
+output_path = os.environ['OUTPUT_DIR'] + '/churn_analysis_dashboard.png'
+import shutil
+shutil.copy('/tmp/churn_analysis_dashboard.png', output_path)
+print(f"Dashboard exported to OUTPUT_DIR")
+</code></pre></details>
+  <p class="editor-result">TextEditorCodeExecutionToolResultBlock · srvtoolu_016PzUBtvqeaLqcss591EGnY · file created · is_file_update=False</p>
+</article>
+
+    
+<article class="tool">
+  <header>
+    <span class="badge bash">bash_code_execution</span>
+    <code class="tool-id">srvtoolu_01DESthJiyLt2nEAMF1P4S5i</code>
+  </header>
+  <p class="note">Runs the plot script. The PNG is the result; stderr is only a matplotlib boxplot labels warning.</p>
+  <pre class="code"><code>cd /tmp &amp;&amp; python create_plot.py</code></pre>
+  <div class="terminal">
+<div class="term-bar">
+<span>BashCodeExecutionToolResultBlock · srvtoolu_01DESthJiyLt2nEAMF1P4S5i</span>
+<span class="rc">return 0</span>
+</div>
+<pre class="stdout">Dashboard saved to /tmp/churn_analysis_dashboard.png
+Dashboard exported to OUTPUT_DIR
+</pre>
+<p class="stream-label">stderr</p>
+<pre class="stderr">/tmp/create_plot.py:89: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
+  bp = ax5.boxplot([titles_retained, titles_churned], labels=['Retained', 'Churned'],
+/tmp/create_plot.py:103: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
+  bp2 = ax6.boxplot([binge_retained, binge_churned], labels=['Retained', 'Churned'],
+/tmp/create_plot.py:117: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
+  bp3 = ax7.boxplot([duration_retained, duration_churned], labels=['Retained', 'Churned'],
+</pre>
+<p class="file-note">Generated file file_01M1ic892SbKgeuP2jKy39s2. This is the dashboard PNG written to the output directory.</p>
+</div>
+</article>
+
+  </section>
+
+  <section>
+    <h2>6 · Findings</h2>
+    <div class="text-block">
+      <p class="block-label">TextBlock</p>
+      <h3>Major churn drivers identified</h3>
+      <p><strong>Top 3 drivers (by importance)</strong></p>
+      <ol>
+        <li><strong>Total Viewing Hours</strong> (23.8%) — churned users watch 66.6 hrs vs 83.2 hrs retained</li>
+        <li><strong>Average Session Duration</strong> (21.5%) — lower engagement indicates churn risk</li>
+        <li><strong>Unique Titles Watched</strong> (15.7%) — churned users watch 19.5 vs 23.7 titles</li>
+      </ol>
+      <p><strong>Key findings</strong></p>
+      <ul>
+        <li><strong>38.6%</strong> overall churn rate</li>
+        <li><strong>Basic tier</strong> has the highest churn (43.5%) vs Premium (24.1%)</li>
+        <li>Higher <strong>CS interactions</strong> correlate with churn (3.18 vs 2.49)</li>
+        <li>Less <strong>binge watching</strong> among churned users (6.2 vs 7.7 sessions)</li>
+      </ul>
+      <p><strong>Dashboard exported with 8 visualizations showing all major drivers.</strong></p>
+    </div>
+  </section>
+
+  <section>
+    <h2>7 · Dashboard created by Claude</h2>
+    <div class="figure">
+      <header>
+        <span class="badge bash">BashCodeExecutionOutputBlock</span>
+        <code class="tool-id">file_01M1ic892SbKgeuP2jKy39s2</code>
+      </header>
+      <p class="note">The PNG written by create_plot.py, downloaded through the Files API using this file id.</p>
+      <button type="button" class="zoom-trigger" id="open-dashboard" aria-haspopup="dialog">
+        <img src="06_churn_analysis_dashboard.png" alt="Comprehensive churn analysis dashboard with eight panels">
+      </button>
+      <p class="zoom-hint">Click the image to zoom.</p>
+    </div>
+  </section>
+</main>
+
+<dialog class="zoom" id="dashboard-zoom" aria-label="Zoomed churn dashboard">
+  <form method="dialog">
+    <button class="exit" type="submit">Exit</button>
+  </form>
+  <img src="06_churn_analysis_dashboard.png" alt="Comprehensive churn analysis dashboard, enlarged">
+</dialog>
+<script>
+  document.getElementById("open-dashboard").addEventListener("click", function () {
+    document.getElementById("dashboard-zoom").showModal();
+  });
+</script>
+</body>
+</html>
